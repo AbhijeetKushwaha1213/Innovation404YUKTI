@@ -1,0 +1,116 @@
+╔══════════════════════════════════════════════════════════════╗
+║         GEMINI BACKEND SETUP CHECKLIST                      ║
+╚══════════════════════════════════════════════════════════════╝
+
+✅ COMPLETED:
+  ✓ Backend code created (7 files)
+  ✓ Dependencies installed (npm install)
+  ✓ Server running on port 3000
+  ✓ Health check passing
+  ✓ Gemini API key configured
+  ✓ Documentation created (4 guides)
+  ✓ Test script created
+
+⏳ TODO (10 minutes):
+
+  STEP 1: Get Supabase Service Key (2 min)
+  ☐ Go to: https://app.supabase.com/project/vzqtjhoevvjxdgocnfju/settings/api
+  ☐ Copy "service_role" key (the secret one)
+  ☐ Open: api/.env
+  ☐ Replace: SUPABASE_SERVICE_KEY=your-key-here
+  ☐ Save file
+
+  STEP 2: Get JWT Secret (1 min)
+  ☐ Same page, scroll to "JWT Settings"
+  ☐ Copy "JWT Secret"
+  ☐ Open: api/.env
+  ☐ Replace: JWT_SECRET=your-secret-here
+  ☐ Save file
+
+  STEP 3: Apply Database Migration (2 min)
+  ☐ Go to: https://app.supabase.com/project/vzqtjhoevvjxdgocnfju/sql/new
+  ☐ Open file: supabase/migrations/20260216000000_create_reports_table.sql
+  ☐ Copy ALL content
+  ☐ Paste in Supabase SQL Editor
+  ☐ Click "Run"
+  ☐ Verify: "Success. No rows returned"
+
+  STEP 4: Restart Server (30 sec)
+  ☐ Press Ctrl+C in terminal
+  ☐ Run: npm run dev
+  ☐ Verify server starts without errors
+
+  STEP 5: Test API (2 min)
+  ☐ Open frontend: http://localhost:5173
+  ☐ Sign in to your account
+  ☐ Open browser console (F12)
+  ☐ Run: const { data: { session } } = await supabase.auth.getSession();
+  ☐ Copy: session.access_token
+  ☐ Test: ./test-endpoint.sh "TOKEN" "image.jpg"
+  ☐ Verify: Response shows analysis results
+
+═══════════════════════════════════════════════════════════════
+
+📋 VERIFICATION COMMANDS:
+
+  # Check server health
+  curl http://localhost:3000/health
+
+  # Check .env configuration
+  cat api/.env | grep -v "^#" | grep "="
+
+  # Check migration file
+  ls -la supabase/migrations/20260216000000_create_reports_table.sql
+
+  # Test endpoint (after getting JWT token)
+  ./test-endpoint.sh "YOUR_JWT_TOKEN" "test_image.jpg"
+
+═══════════════════════════════════════════════════════════════
+
+📚 DOCUMENTATION:
+
+  • Setup Guide:    api/SETUP_INSTRUCTIONS.md  ← START HERE
+  • Quick Start:    api/QUICKSTART.md
+  • Full Docs:      api/README.md
+  • Examples:       api/EXAMPLES.md
+  • Summary:        GEMINI_BACKEND_IMPLEMENTATION.md
+  • Status:         BACKEND_STATUS.md
+
+═══════════════════════════════════════════════════════════════
+
+🎯 CURRENT STATUS:
+
+  Server:           ✅ Running on port 3000
+  Health Check:     ✅ Passing
+  Gemini API:       ✅ Configured
+  Supabase Keys:    ⏳ Needs configuration
+  Database:         ⏳ Needs migration
+  Testing:          ⏳ Waiting for JWT token
+
+═══════════════════════════════════════════════════════════════
+
+💡 QUICK TIPS:
+
+  • Service key is different from anon key (use the secret one)
+  • JWT secret is in Supabase Dashboard > Settings > API
+  • Migration creates the "reports" table
+  • Test with a real image (JPEG or PNG, < 5MB)
+  • Watch backend console for detailed logs
+
+═══════════════════════════════════════════════════════════════
+
+🚀 AFTER SETUP:
+
+  ☐ Test with different civic issue images
+  ☐ Check reports in Supabase Table Editor
+  ☐ Integrate with frontend (see api/EXAMPLES.md)
+  ☐ Monitor Gemini API usage
+  ☐ Deploy to production (see api/README.md)
+
+═══════════════════════════════════════════════════════════════
+
+⏱️  ESTIMATED TIME: 10 minutes
+🎓 DIFFICULTY: Easy
+📞 HELP: Check api/SETUP_INSTRUCTIONS.md for detailed steps
+
+═══════════════════════════════════════════════════════════════
